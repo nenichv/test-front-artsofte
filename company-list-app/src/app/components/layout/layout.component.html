@@ -1,2 +1,12 @@
-<p>layout works!</p>
-<router-outlet></router-outlet>
+<div class="layout">
+  <header class="layout__header">Информация о компаниях</header>
+  <nav class="layout__navigation">
+    <button [routerLink]="'/list'" class="layout__navigation-button">
+      Список компаний
+    </button>
+    <button [routerLink]="'/map'" class="layout__navigation-button">
+      Посмотреть компании на карте
+    </button>
+  </nav>
+  <router-outlet></router-outlet>
+</div>

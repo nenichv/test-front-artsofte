@@ -1,1 +1,24 @@
-<p>company-item works!</p>
+<div *ngIf="company" class="company-item">
+  <img src="{{company.logo}}" alt="logo" class="company-item__logotype"/>
+
+  <div class="company-item__information">
+    <h2 class="company-item__header">
+      {{company.suffix}} "{{company.business_name}}"
+    </h2>
+
+    <div>
+      <span class="company-item__information-header">Industry: </span>
+      <span>{{company.industry}}</span>
+    </div>
+
+    <div>
+      <span class="company-item__information-header">Type: </span>
+      <span>{{company.type}}</span>
+    </div>
+
+    <button class="company-item__information-button" [routerLink]="['/detail', company.id]">
+      <img src="next.svg" alt="next">
+      <span class="company-item__information-button-text">READ MORE</span>
+    </button>
+  </div>
+</div>

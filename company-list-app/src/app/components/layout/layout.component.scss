@@ -1,0 +1,35 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Manrope', sans-serif;
+  padding-top: 5em;
+
+  &__header {
+    font-size: 26px;
+    font-weight: 600;
+  }
+
+  &__navigation {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+  }
+
+  &__navigation-button {
+    width: 20em;
+    height: 2.5em;
+    font-size: 20px;
+    background-color: #ff7e31;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    font-family: 'Manrope', sans-serif;
+    &:hover {
+      background-color: #ffa067;
+      cursor: pointer;
+    }
+  }
+}

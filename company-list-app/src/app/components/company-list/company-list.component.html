@@ -1,1 +1,9 @@
-<p>company-list works!</p>
+<ng-container *ngIf="allCompanies$ | async as companies; else loading">
+  <company-item *ngFor="let company of companies" [company]="company"/>
+</ng-container>
+
+<ng-template #loading>
+  <div class="company-list__loader"></div>
+  <div class="company-list__loader"></div>
+  <div class="company-list__loader"></div>
+</ng-template>

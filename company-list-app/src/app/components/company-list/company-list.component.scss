@@ -1,0 +1,16 @@
+.company-list {
+  &__loader {
+    border: 10px solid #ffffff;
+    border-top: 10px solid #ff9d59;
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    animation: spin 2s linear infinite;
+    margin-bottom: 10em;
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+.company-item {
+  border: #ffaa77 solid 1px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 3em;
+  padding: 1em;
+  align-items: center;
+  margin-bottom: 1em;
+  width: 50em;
+
+  &__information {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  &__information-header {
+    font-weight: 600;
+  }
+
+  &__header {
+    color: #ff7e31;
+  }
+
+  &__logotype {
+    width: 30%;
+  }
+
+  &__information-button {
+    width: 140px;
+    height: 35px;
+    background-color: #ff7e31;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    font-family: 'Manrope', sans-serif;
+    gap: 10px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(255, 170, 119);
+    }
+  }
+
+  &__information-button-text {
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+  }
+}
