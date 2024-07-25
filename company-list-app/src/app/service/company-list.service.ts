@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {map, Observable, of} from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ICompany } from "../interfaces/company.interface";
 import { HttpClient } from "@angular/common/http";
 
@@ -8,6 +8,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class CompanyListService {
   private companies: ICompany[] | undefined;
+  private sortedCompanies: ICompany[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -22,14 +23,23 @@ export class CompanyListService {
 
   public setAllCompanies(companies: ICompany[]): void {
     this.companies = companies;
+    this.sortedCompanies = [...companies];
   }
 
   public getCompanyById(id: number): ICompany | undefined {
-    if (this.companies) {
-      return this.companies.find((company) => company.id == id);
-    } else {
-      console.log('1243')
-      return undefined;
+    return this.companies!.find((company) => company.id == id);
+  }
+
+  public sortListCompanies(sortOption: string): ICompany[] | undefined {
+    switch (sortOption) {
+      case 'name':
+        return this.sortedCompanies.sort((a, b) => a.business_name.localeCompare(b.business_name));
+      case 'type':
+        return this.sortedCompanies.sort((a, b) => a.type.localeCompare(b.type));
+      case 'industry':
+        return this.sortedCompanies.sort((a, b) => a.industry.localeCompare(b.industry));
+      default:
+        return this.sortedCompanies = [...this.companies!];
     }
   }
 }

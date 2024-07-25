@@ -1,1 +1,8 @@
-<p>company-sort works!</p>
+<ng-container class="company-sort">
+  <select id="sortType" [(ngModel)]="selectedOption" (change)="onSortChange()" class="company-sort__select">
+    <option value="default">All companies</option>
+    <option value="name">Sort by name</option>
+    <option value="type">Sort by type</option>
+    <option value="industry">Sort by industry</option>
+  </select>
+</ng-container>

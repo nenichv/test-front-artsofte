@@ -1,5 +1,6 @@
-<ng-container *ngIf="allCompanies$ | async as companies; else loading">
-  <company-item *ngFor="let company of companies" [company]="company"/>
+<ng-container *ngIf="allCompanies$ | async; else loading">
+  <company-sort (sortChange)="onSortChange($event)"></company-sort>
+  <company-item *ngFor="let company of sortList" [company]="company"/>
 </ng-container>
 
 <ng-template #loading>

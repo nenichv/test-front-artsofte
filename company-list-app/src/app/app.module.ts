@@ -8,13 +8,17 @@ import { CompanyDetailComponent } from "./components/company-detail/company-deta
 import { CompanyYandexMapComponent } from "./components/company-yandex-map/company-yandex-map.component";
 import {CompanyItemComponent} from "./components/company-item/company-item.component";
 import {HttpClientModule} from "@angular/common/http";
+import {CompanySortComponent} from "./components/company-sort/company-sort.component";
+import {CompanyFilterComponent} from "./components/company-filter/company-filter.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     imports: [
-        BrowserModule,
-        HttpClientModule,
-        AppRoutingModule,
-        CompanyItemComponent
+      BrowserModule,
+      HttpClientModule,
+      AppRoutingModule,
+      CompanyItemComponent,
+      FormsModule
     ],
   providers: [],
   declarations: [
@@ -23,6 +27,8 @@ import {HttpClientModule} from "@angular/common/http";
     CompanyListComponent,
     CompanyDetailComponent,
     CompanyYandexMapComponent,
+    CompanySortComponent,
+    CompanyFilterComponent
   ],
   exports: [],
   bootstrap: [AppComponent],
