@@ -1,7 +1,7 @@
 .company-list {
   &__loader {
-    border: 10px solid #ffffff;
-    border-top: 10px solid #ff9d59;
+    border: 10px solid var(--text-button-color);
+    border-top: 10px solid var(--middle-color);
     border-radius: 50%;
     width: 90px;
     height: 90px;

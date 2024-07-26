@@ -1,5 +1,5 @@
 .company-item {
-  border: #ffaa77 solid 1px;
+  border: var(--middle-color) solid 1px;
   border-radius: 10px;
   display: flex;
   flex-direction: row;
@@ -21,7 +21,7 @@
   }
 
   &__header {
-    color: #ff7e31;
+    color: var(--main-color);
   }
 
   &__logotype {
@@ -31,7 +31,7 @@
   &__information-button {
     width: 140px;
     height: 35px;
-    background-color: #ff7e31;
+    background-color: var(--main-color);
     border: none;
     border-radius: 10px;
     display: flex;
@@ -42,7 +42,7 @@
 
     &:hover {
       cursor: pointer;
-      background-color: rgb(255, 170, 119);
+      background-color: var(--middle-color);
     }
   }
 

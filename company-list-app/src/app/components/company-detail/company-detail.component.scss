@@ -18,14 +18,14 @@
 
   &__information-block-header {
     font-size: 22px;
-    color: #ff7e31;
+    color: var(--main-color);
     margin-top: -1em;
   }
 
   &__information-block-phrase {
     font-size: 16px;
     font-weight: 600;
-    color: #ff7929;
+    color: var(--main-color);
     margin-top: -1em;
     margin-bottom: 1em;
     font-style: italic;
@@ -34,11 +34,11 @@
   &__information-block-text {
     font-size: 16px;
     font-weight: 600;
-    color: #000000;
+    color: var(--text-color);
   }
 
   &__information-block-template {
     font-size: 16px;
-    color: #000000;
+    color: var(--text-color);
   }
 }

@@ -4,7 +4,6 @@
   gap: 2em;
   justify-content: center;
   align-items: center;
-  font-family: 'Manrope', sans-serif;
   padding-top: 5em;
 
   &__header {
@@ -22,13 +21,14 @@
     width: 20em;
     height: 2.5em;
     font-size: 20px;
-    background-color: #ff7e31;
-    color: white;
+    background-color: var(--main-color);
+    color: var(--text-button-color);
     border-radius: 20px;
     border: none;
     font-family: 'Manrope', sans-serif;
+    font-weight: 400;
     &:hover {
-      background-color: #ffa067;
+      background-color: var(--middle-color);
       cursor: pointer;
     }
   }

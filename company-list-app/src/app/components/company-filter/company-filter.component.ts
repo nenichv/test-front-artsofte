@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormGroup, FormControl} from "@angular/forms";
 
 @Component({
@@ -6,23 +6,25 @@ import {FormGroup, FormControl} from "@angular/forms";
   templateUrl: './company-filter.component.html',
   styleUrl: './company-filter.component.scss'
 })
-export class CompanyFilterComponent {
+export class CompanyFilterComponent implements OnInit {
   @Input() public types: string[] = [];
   @Input() public industries: string[] = [];
   @Output() protected filterEvent = new EventEmitter();
 
   protected filterForm = new FormGroup({
     textBox: new FormControl(''),
-    selectBoxCompanyType: new FormControl(''),
-    selectBoxCompanyIndustry: new FormControl('')
+    selectBoxCompanyType: new FormControl('default'),
+    selectBoxCompanyIndustry: new FormControl('default')
   });
 
-  constructor() {
-    const filterData = {
-      searchText: this.filterForm.controls.textBox.value,
-      companyType: this.filterForm.controls.selectBoxCompanyType.value,
-      industryType: this.filterForm.controls.selectBoxCompanyIndustry.value
-    };
-    this.filterEvent.emit(filterData);
+  ngOnInit() {
+    this.filterForm.valueChanges.subscribe(value => {
+      const filters = {
+        searchText: value.textBox,
+        companyType: value.selectBoxCompanyType,
+        industryType: value.selectBoxCompanyIndustry
+      };
+      this.filterEvent.emit(filters);
+    });
   }
 }

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { ICompany } from "../interfaces/company.interface";
 import { HttpClient } from "@angular/common/http";
+import {IFilterData} from "../interfaces/filter-data.interface";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyListService {
   private companies: ICompany[] | undefined;
-  private sortedCompanies: ICompany[] = [];
+  private filterSortList: ICompany[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -31,7 +32,7 @@ export class CompanyListService {
 
   public setAllCompanies(companies: ICompany[]): void {
     this.companies = companies;
-    this.sortedCompanies = [...companies];
+    this.filterSortList = [...companies];
   }
 
   public getCompanyById(id: number): ICompany | undefined {
@@ -39,15 +40,41 @@ export class CompanyListService {
   }
 
   public sortListCompanies(sortOption: string): ICompany[] | undefined {
+    let sortList = [...this.filterSortList];
+
     switch (sortOption) {
       case 'name':
-        return this.sortedCompanies.sort((current: ICompany, next: ICompany) => current.business_name.localeCompare(next.business_name));
+        sortList = this.filterSortList.sort((current: ICompany, next: ICompany) => current.business_name.localeCompare(next.business_name));
+        break;
       case 'type':
-        return this.sortedCompanies.sort((current: ICompany, next: ICompany) => current.type.localeCompare(next.type));
+        sortList = this.filterSortList.sort((current: ICompany, next: ICompany) => current.type.localeCompare(next.type));
+        break;
       case 'industry':
-        return this.sortedCompanies.sort((current: ICompany, next: ICompany) => current.industry.localeCompare(next.industry));
-      default:
-        return this.sortedCompanies = [...this.companies!];
+        sortList = this.filterSortList.sort((current: ICompany, next: ICompany) => current.industry.localeCompare(next.industry));
+        break;
     }
+    this.filterSortList = sortList;
+    return this.filterSortList;
+  }
+
+  public filterListCompaniesBySearch(filterData: IFilterData): ICompany[] {
+    if (!filterData.searchText || filterData.searchText === '') {
+      return this.filterSortList;
+    }
+    return this.filterSortList.filter((company) => company.business_name.toLowerCase().includes(filterData.searchText!.toLowerCase()))
+  }
+
+  public filterListCompaniesByType(filterData: IFilterData): ICompany[] {
+    if (!filterData.companyType || filterData.companyType === 'default') {
+      return this.filterSortList;
+    }
+    return this.filterSortList.filter(company => company.type === filterData.companyType);
+  }
+
+  public filterListCompaniesByIndustry(filterData: IFilterData): ICompany[] {
+    if (!filterData.companyIndustry || filterData.companyIndustry === 'default') {
+      return this.filterSortList;
+    }
+    return this.filterSortList.filter(company => company.industry === filterData.companyIndustry);
   }
 }
