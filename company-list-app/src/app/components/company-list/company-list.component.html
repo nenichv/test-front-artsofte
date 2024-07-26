@@ -1,6 +1,8 @@
 <ng-container *ngIf="allCompanies$ | async; else loading">
-  <company-sort (sortChange)="onSortChange($event)"></company-sort>
-  <company-filter (filterEvent)="applyFilter($event)" [types]="types" [industries]="industries"></company-filter>
+  <div class="company-list__instrument">
+    <company-filter (filterEvent)="applyFilter($event)" [types]="types" [industries]="industries"></company-filter>
+    <company-sort (sortChange)="onSortChange($event)"></company-sort>
+  </div>
   <company-item *ngFor="let company of sortList" [company]="company"/>
 </ng-container>
 

@@ -1,4 +1,10 @@
 .company-list {
+  &__instrument {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
   &__loader {
     border: 10px solid var(--text-button-color);
     border-top: 10px solid var(--middle-color);

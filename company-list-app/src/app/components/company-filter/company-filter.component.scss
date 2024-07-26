@@ -1,0 +1,56 @@
+.company-filter {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+
+  &__search-block {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--text-color);
+    border-radius: 5px;
+    width: 230px;
+    height: 38px;
+    padding-left: 5px;
+  }
+
+  &__search-text {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    width: 200px;
+    color: var(--text-color);
+    border: none;
+    height: 30px;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__select-types {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    height: 40px;
+    width: 150px;
+    color: var(--text-color);
+    border: var(--text-color) 1px solid;
+    border-radius: 5px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__select-industries {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    height: 40px;
+    width: 150px;
+    color: var(--main-color);
+    border: var(--main-color) 1px solid;
+    border-radius: 5px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: var(--bg-select-hover);
+    }
+  }
+}

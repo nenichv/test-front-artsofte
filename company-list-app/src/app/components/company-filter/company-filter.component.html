@@ -1,10 +1,13 @@
-<form [formGroup]="filterForm">
-  <input formControlName="textBox" placeholder="Search by name company">
-  <select formControlName="selectBoxCompanyType">
+<form [formGroup]="filterForm" class="company-filter">
+  <div class="company-filter__search-block">
+    <img alt="icon" src="search.svg"/>
+    <input formControlName="textBox" placeholder="Search by name company" class="company-filter__search-text">
+  </div>
+  <select formControlName="selectBoxCompanyType" class="company-filter__select-types">
     <option value="default">All types</option>
     <option *ngFor="let type of types" [value]="type">{{type}}</option>
   </select>
-  <select formControlName="selectBoxCompanyIndustry">
+  <select formControlName="selectBoxCompanyIndustry" class="company-filter__select-industries">
     <option value="default">All industries</option>
     <option *ngFor="let industry of industries" [value]="industry">{{industry}}</option>
   </select>
