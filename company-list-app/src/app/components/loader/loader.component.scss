@@ -1,0 +1,20 @@
+.container-loaders {
+  display: flex;
+  flex-direction: column;
+  gap: 10em;
+
+  &__loader {
+    border: 10px solid var(--text-button-color);
+    border-top: 10px solid var(--middle-color);
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    animation: spin 2s linear infinite;
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  }
+}
+

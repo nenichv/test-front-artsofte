@@ -1,13 +1,14 @@
-<ng-container *ngIf="allCompanies$ | async; else loading">
+<ng-container *ngIf="allCompanies$ | async; else loaderTemplate" class="company-list">
   <div class="company-list__instrument">
     <company-filter (filterEvent)="applyFilter($event)" [types]="types" [industries]="industries"></company-filter>
     <company-sort (sortChange)="onSortChange($event)"></company-sort>
   </div>
-  <company-item *ngFor="let company of sortList" [company]="company"/>
+  <div class="company-list__container-items">
+    <company-item *ngFor="let company of filterList" [company]="company"/>
+  </div>
 </ng-container>
 
-<ng-template #loading>
-  <div class="company-list__loader"></div>
-  <div class="company-list__loader"></div>
-  <div class="company-list__loader"></div>
+<ng-template #loaderTemplate>
+  <loader/>
 </ng-template>
+

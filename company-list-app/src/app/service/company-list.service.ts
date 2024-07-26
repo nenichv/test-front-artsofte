@@ -8,8 +8,7 @@ import {IFilterData} from "../interfaces/filter-data.interface";
   providedIn: 'root'
 })
 export class CompanyListService {
-  private companies: ICompany[] | undefined;
-  private filterSortList: ICompany[] = [];
+  private companies?: ICompany[];
 
   constructor(private http: HttpClient) {}
 
@@ -32,49 +31,42 @@ export class CompanyListService {
 
   public setAllCompanies(companies: ICompany[]): void {
     this.companies = companies;
-    this.filterSortList = [...companies];
   }
 
   public getCompanyById(id: number): ICompany | undefined {
     return this.companies!.find((company: ICompany) => company.id == id);
   }
 
-  public sortListCompanies(sortOption: string): ICompany[] | undefined {
-    let sortList = [...this.filterSortList];
-
+  public sortListCompanies(sortOption: string, list: ICompany[]): ICompany[] | undefined {
     switch (sortOption) {
       case 'name':
-        sortList = this.filterSortList.sort((current: ICompany, next: ICompany) => current.business_name.localeCompare(next.business_name));
-        break;
+        return list.sort((current: ICompany, next: ICompany) => current.business_name.localeCompare(next.business_name));
       case 'type':
-        sortList = this.filterSortList.sort((current: ICompany, next: ICompany) => current.type.localeCompare(next.type));
-        break;
+        return list.sort((current: ICompany, next: ICompany) => current.type.localeCompare(next.type));
       case 'industry':
-        sortList = this.filterSortList.sort((current: ICompany, next: ICompany) => current.industry.localeCompare(next.industry));
-        break;
+        return list.sort((current: ICompany, next: ICompany) => current.industry.localeCompare(next.industry));
+      default:
+        return list;
     }
-    this.filterSortList = sortList;
-    return this.filterSortList;
   }
+  public filterListCompanies(filterData: IFilterData) {
+    return this.companies!.filter(el => {
+        let res = true
 
-  public filterListCompaniesBySearch(filterData: IFilterData): ICompany[] {
-    if (!filterData.searchText || filterData.searchText === '') {
-      return this.filterSortList;
-    }
-    return this.filterSortList.filter((company) => company.business_name.toLowerCase().includes(filterData.searchText!.toLowerCase()))
-  }
+        if (filterData.companyType && filterData.companyType !== 'default') {
+          res = el.type === filterData.companyType
+        }
 
-  public filterListCompaniesByType(filterData: IFilterData): ICompany[] {
-    if (!filterData.companyType || filterData.companyType === 'default') {
-      return this.filterSortList;
-    }
-    return this.filterSortList.filter(company => company.type === filterData.companyType);
-  }
+        if (filterData.companyIndustry && filterData.companyIndustry !== 'default') {
+          res = res && el.industry === filterData.companyIndustry
+        }
 
-  public filterListCompaniesByIndustry(filterData: IFilterData): ICompany[] {
-    if (!filterData.companyIndustry || filterData.companyIndustry === 'default') {
-      return this.filterSortList;
-    }
-    return this.filterSortList.filter(company => company.industry === filterData.companyIndustry);
+        if (filterData.searchText) {
+          res = res &&  el.business_name.toLowerCase().includes(filterData.searchText!.toLowerCase())
+        }
+
+        return res
+      }
+    )
   }
 }

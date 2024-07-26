@@ -22,7 +22,7 @@ export class CompanyFilterComponent implements OnInit {
       const filters = {
         searchText: value.textBox,
         companyType: value.selectBoxCompanyType,
-        industryType: value.selectBoxCompanyIndustry
+        companyIndustry: value.selectBoxCompanyIndustry
       };
       this.filterEvent.emit(filters);
     });

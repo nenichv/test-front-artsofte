@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { ICompany } from "../../interfaces/company.interface";
 import { CompanyListService } from "../../service/company-list.service";
 import { Observable, startWith, Subject, switchMap, tap } from "rxjs";
+import {IFilterData} from "../../interfaces/filter-data.interface";
 
 @Component({
   selector: 'company-list',
@@ -11,7 +12,8 @@ import { Observable, startWith, Subject, switchMap, tap } from "rxjs";
 export class CompanyListComponent implements OnInit {
   protected allCompanies$: Observable<ICompany[]>;
   protected refreshSubject$: Subject<void> = new Subject<void>();
-  protected sortList: ICompany[] | undefined = [];
+  protected filterList?: ICompany[] = [];
+  protected sortList?: ICompany[] = [];
   protected types: string[] = [];
   protected industries: string[] = [];
 
@@ -21,7 +23,7 @@ export class CompanyListComponent implements OnInit {
         startWith(null),
         switchMap(() => this.getAllCompany()),
         tap((companies: ICompany[]) => {
-          this.sortList = this.listService.sortListCompanies('default');
+          this.filterList = companies;
           this.getAllTypesCompanies();
           this.getAllIndustriesCompanies();
         })
@@ -37,7 +39,7 @@ export class CompanyListComponent implements OnInit {
   }
 
   protected onSortChange(sortOption: string): void {
-    this.sortList = this.listService.sortListCompanies(sortOption);
+    this.sortList = this.listService.sortListCompanies(sortOption, this.filterList!);
   }
 
   protected getAllTypesCompanies(): void {
@@ -48,9 +50,7 @@ export class CompanyListComponent implements OnInit {
     this.industries = this.listService.getAllIndustriesCompanies();
   }
 
-  protected applyFilter(filterData: any): void {
-    this.sortList = this.listService.filterListCompaniesBySearch(filterData);
-    this.sortList = this.listService.filterListCompaniesByType(filterData);
-    this.sortList = this.listService.filterListCompaniesByIndustry(filterData);
+  protected applyFilter(filterData: IFilterData): void {
+    this.filterList = this.listService.filterListCompanies(filterData);
   }
 }
