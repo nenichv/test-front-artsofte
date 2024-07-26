@@ -10,7 +10,7 @@ import {CompanyItemComponent} from "./components/company-item/company-item.compo
 import {HttpClientModule} from "@angular/common/http";
 import {CompanySortComponent} from "./components/company-sort/company-sort.component";
 import {CompanyFilterComponent} from "./components/company-filter/company-filter.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     imports: [
@@ -18,7 +18,8 @@ import {FormsModule} from "@angular/forms";
       HttpClientModule,
       AppRoutingModule,
       CompanyItemComponent,
-      FormsModule
+      FormsModule,
+      ReactiveFormsModule
     ],
   providers: [],
   declarations: [

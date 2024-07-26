@@ -13,12 +13,20 @@ export class CompanyListService {
   constructor(private http: HttpClient) {}
 
   public getAllCompanies(): Observable<ICompany[]> {
-    return this.http.get<ICompany[]>('https://random-data-api.com/api/company/random_company?size=100').pipe(
-      map(companies => {
+    return this.http.get<ICompany[]>('https://random-data-api.com/api/company/random_company?size=3').pipe(
+      map((companies: ICompany[]) => {
         this.setAllCompanies(companies);
         return companies;
       })
     );
+  }
+
+  public getAllTypesCompanies(): string[] {
+    return this.companies ? [...new Set(this.companies.map((company: ICompany) => company.type))] : [];
+  }
+
+  public getAllIndustriesCompanies(): string[] {
+    return this.companies ? [...new Set(this.companies.map((company: ICompany) => company.industry))] : [];
   }
 
   public setAllCompanies(companies: ICompany[]): void {
@@ -27,17 +35,17 @@ export class CompanyListService {
   }
 
   public getCompanyById(id: number): ICompany | undefined {
-    return this.companies!.find((company) => company.id == id);
+    return this.companies!.find((company: ICompany) => company.id == id);
   }
 
   public sortListCompanies(sortOption: string): ICompany[] | undefined {
     switch (sortOption) {
       case 'name':
-        return this.sortedCompanies.sort((a, b) => a.business_name.localeCompare(b.business_name));
+        return this.sortedCompanies.sort((current: ICompany, next: ICompany) => current.business_name.localeCompare(next.business_name));
       case 'type':
-        return this.sortedCompanies.sort((a, b) => a.type.localeCompare(b.type));
+        return this.sortedCompanies.sort((current: ICompany, next: ICompany) => current.type.localeCompare(next.type));
       case 'industry':
-        return this.sortedCompanies.sort((a, b) => a.industry.localeCompare(b.industry));
+        return this.sortedCompanies.sort((current: ICompany, next: ICompany) => current.industry.localeCompare(next.industry));
       default:
         return this.sortedCompanies = [...this.companies!];
     }

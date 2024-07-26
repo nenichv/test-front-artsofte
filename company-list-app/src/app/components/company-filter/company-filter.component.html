@@ -1,1 +1,11 @@
-<p>company-filter works!</p>
+<form [formGroup]="filterForm">
+  <input formControlName="textBox" placeholder="Search by name company">
+  <select formControlName="selectBoxCompanyType">
+    <option value="default">All types</option>
+    <option *ngFor="let type of types" [value]="type">{{type}}</option>
+  </select>
+  <select formControlName="selectBoxCompanyIndustry">
+    <option value="default">All industries</option>
+    <option *ngFor="let industry of industries" [value]="industry">{{industry}}</option>
+  </select>
+</form>
