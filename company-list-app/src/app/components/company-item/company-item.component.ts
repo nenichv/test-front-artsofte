@@ -1,7 +1,7 @@
-import {Component, Input} from '@angular/core';
-import {ICompany} from "../../interfaces/company.interface";
-import {NgIf, NgOptimizedImage} from "@angular/common";
-import {RouterLink} from "@angular/router";
+import { Component, Input } from '@angular/core';
+import { ICompany } from "../../interfaces/company.interface";
+import { NgIf, NgOptimizedImage } from "@angular/common";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'company-item',

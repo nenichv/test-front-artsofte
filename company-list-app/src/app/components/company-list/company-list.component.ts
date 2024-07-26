@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { ICompany } from "../../interfaces/company.interface";
 import { CompanyListService } from "../../service/company-list.service";
 import { Observable, startWith, Subject, switchMap, tap } from "rxjs";
-import {IFilterData} from "../../interfaces/filter-data.interface";
+import { IFilterData } from "../../interfaces/filter-data.interface";
 
 @Component({
   selector: 'company-list',
@@ -50,7 +50,7 @@ export class CompanyListComponent implements OnInit {
     this.industries = this.listService.getAllIndustriesCompanies();
   }
 
-  protected applyFilter(filterData: IFilterData): void {
+  protected onFilterChange(filterData: IFilterData): void {
     this.filterList = this.listService.filterListCompanies(filterData);
   }
 }

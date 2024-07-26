@@ -1,6 +1,6 @@
 <ng-container *ngIf="allCompanies$ | async; else loaderTemplate" class="company-list">
   <div class="company-list__instrument">
-    <company-filter (filterEvent)="applyFilter($event)" [types]="types" [industries]="industries"></company-filter>
+    <company-filter (filterEvent)="onFilterChange($event)" [types]="types" [industries]="industries"></company-filter>
     <company-sort (sortChange)="onSortChange($event)"></company-sort>
   </div>
   <div class="company-list__container-items">

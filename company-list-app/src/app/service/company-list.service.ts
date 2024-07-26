@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { ICompany } from "../interfaces/company.interface";
 import { HttpClient } from "@angular/common/http";
-import {IFilterData} from "../interfaces/filter-data.interface";
+import { IFilterData } from "../interfaces/filter-data.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -50,23 +50,20 @@ export class CompanyListService {
     }
   }
   public filterListCompanies(filterData: IFilterData) {
-    return this.companies!.filter(el => {
-        let res = true
+    return this.companies!.filter((company: ICompany) => {
+      let checked: boolean = true;
 
-        if (filterData.companyType && filterData.companyType !== 'default') {
-          res = el.type === filterData.companyType
-        }
-
-        if (filterData.companyIndustry && filterData.companyIndustry !== 'default') {
-          res = res && el.industry === filterData.companyIndustry
-        }
-
-        if (filterData.searchText) {
-          res = res &&  el.business_name.toLowerCase().includes(filterData.searchText!.toLowerCase())
-        }
-
-        return res
+      if (filterData.companyType && filterData.companyType !== 'default') {
+        checked = company.type === filterData.companyType
       }
+      if (filterData.companyIndustry && filterData.companyIndustry !== 'default') {
+        checked = checked && company.industry === filterData.companyIndustry
+      }
+      if (filterData.searchText) {
+        checked = checked &&  company.business_name.toLowerCase().includes(filterData.searchText!.toLowerCase())
+      }
+      return checked;
+    }
     )
   }
 }
