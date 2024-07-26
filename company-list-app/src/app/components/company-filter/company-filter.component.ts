@@ -7,9 +7,12 @@ import { FormGroup, FormControl } from "@angular/forms";
   styleUrl: './company-filter.component.scss'
 })
 export class CompanyFilterComponent implements OnInit {
-  @Input() public types: string[] = [];
-  @Input() public industries: string[] = [];
-  @Output() protected filterEvent = new EventEmitter();
+  @Input()
+  public types: string[] = [];
+  @Input()
+  public industries: string[] = [];
+  @Output()
+  protected filterEvent = new EventEmitter();
 
   protected filterForm = new FormGroup({
     textBox: new FormControl(''),

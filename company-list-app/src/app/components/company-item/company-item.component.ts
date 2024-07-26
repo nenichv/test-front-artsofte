@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ICompany } from "../../interfaces/company.interface";
+import { ICompany } from "../../models/company.interface";
 import { NgIf, NgOptimizedImage } from "@angular/common";
 import { RouterLink } from "@angular/router";
 
@@ -16,5 +16,5 @@ import { RouterLink } from "@angular/router";
 })
 export class CompanyItemComponent {
   @Input()
-  company?: ICompany;
+  public company?: ICompany;
 }

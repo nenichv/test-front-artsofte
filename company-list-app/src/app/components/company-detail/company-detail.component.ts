@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { CompanyListService } from "../../service/company-list.service";
-import { ICompany } from "../../interfaces/company.interface";
+import { ICompany } from "../../models/company.interface";
 
 @Component({
   selector: 'company-detail',

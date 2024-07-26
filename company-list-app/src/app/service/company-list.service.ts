@@ -1,43 +1,44 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { ICompany } from "../interfaces/company.interface";
+import { ICompany } from "../models/company.interface";
 import { HttpClient } from "@angular/common/http";
-import { IFilterData } from "../interfaces/filter-data.interface";
+import { IFilterData } from "../models/filter-data.interface";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyListService {
-  private companies?: ICompany[];
+  private _companies?: ICompany[];
 
   constructor(private http: HttpClient) {}
 
   public getAllCompanies(): Observable<ICompany[]> {
-    return this.http.get<ICompany[]>('https://random-data-api.com/api/company/random_company?size=3').pipe(
-      map((companies: ICompany[]) => {
+    return this.http
+      .get<ICompany[]>('https://random-data-api.com/api/company/random_company?size=100')
+      .pipe(map((companies: ICompany[]) => {
         this.setAllCompanies(companies);
         return companies;
       })
     );
   }
 
-  public getAllTypesCompanies(): string[] {
-    return this.companies ? [...new Set(this.companies.map((company: ICompany) => company.type))] : [];
+  public getAllTypesCompanies(filterList: ICompany[]): string[] {
+    return filterList ? [...new Set(filterList.map((company: ICompany) => company.type))] : [];
   }
 
-  public getAllIndustriesCompanies(): string[] {
-    return this.companies ? [...new Set(this.companies.map((company: ICompany) => company.industry))] : [];
+  public getAllIndustriesCompanies(filterList: ICompany[]): string[] {
+    return filterList ? [...new Set(filterList.map((company: ICompany) => company.industry))] : [];
   }
 
   public setAllCompanies(companies: ICompany[]): void {
-    this.companies = companies;
+    this._companies = companies;
   }
 
   public getCompanyById(id: number): ICompany | undefined {
-    return this.companies!.find((company: ICompany) => company.id == id);
+    return this._companies!.find((company: ICompany) => company.id == id);
   }
 
-  public sortListCompanies(sortOption: string, list: ICompany[]): ICompany[] | undefined {
+  public sortListCompanies(sortOption: string, list: ICompany[]): ICompany[] {
     switch (sortOption) {
       case 'name':
         return list.sort((current: ICompany, next: ICompany) => current.business_name.localeCompare(next.business_name));
@@ -49,8 +50,9 @@ export class CompanyListService {
         return list;
     }
   }
+
   public filterListCompanies(filterData: IFilterData) {
-    return this.companies!.filter((company: ICompany) => {
+    return this._companies!.filter((company: ICompany) => {
       let checked: boolean = true;
 
       if (filterData.companyType && filterData.companyType !== 'default') {
@@ -62,6 +64,7 @@ export class CompanyListService {
       if (filterData.searchText) {
         checked = checked &&  company.business_name.toLowerCase().includes(filterData.searchText!.toLowerCase())
       }
+
       return checked;
     }
     )

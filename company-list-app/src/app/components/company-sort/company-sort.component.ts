@@ -6,7 +6,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './company-sort.component.scss'
 })
 export class CompanySortComponent {
-  @Output() sortChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output()
+  public sortChange: EventEmitter<string> = new EventEmitter<string>();
   protected selectedOption: string = 'default';
 
   onSortChange(): void {

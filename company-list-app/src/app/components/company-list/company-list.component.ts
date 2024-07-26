@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import { ICompany } from "../../interfaces/company.interface";
+import { ICompany } from "../../models/company.interface";
 import { CompanyListService } from "../../service/company-list.service";
 import { Observable, startWith, Subject, switchMap, tap } from "rxjs";
-import { IFilterData } from "../../interfaces/filter-data.interface";
+import { IFilterData } from "../../models/filter-data.interface";
 
 @Component({
   selector: 'company-list',
@@ -14,6 +14,7 @@ export class CompanyListComponent implements OnInit {
   protected refreshSubject$: Subject<void> = new Subject<void>();
   protected filterList?: ICompany[] = [];
   protected sortList?: ICompany[] = [];
+  protected list: ICompany[] = [];
   protected types: string[] = [];
   protected industries: string[] = [];
 
@@ -24,6 +25,7 @@ export class CompanyListComponent implements OnInit {
         switchMap(() => this.getAllCompany()),
         tap((companies: ICompany[]) => {
           this.filterList = companies;
+          this.sortList = companies;
           this.getAllTypesCompanies();
           this.getAllIndustriesCompanies();
         })
@@ -43,14 +45,16 @@ export class CompanyListComponent implements OnInit {
   }
 
   protected getAllTypesCompanies(): void {
-    this.types = this.listService.getAllTypesCompanies();
+    this.types = this.listService.getAllTypesCompanies(this.filterList!);
   }
 
   protected getAllIndustriesCompanies(): void {
-    this.industries = this.listService.getAllIndustriesCompanies();
+    this.industries = this.listService.getAllIndustriesCompanies(this.filterList!);
   }
 
   protected onFilterChange(filterData: IFilterData): void {
     this.filterList = this.listService.filterListCompanies(filterData);
+    this.getAllTypesCompanies();
+    this.getAllIndustriesCompanies();
   }
 }

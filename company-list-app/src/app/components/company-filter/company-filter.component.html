@@ -1,7 +1,7 @@
 <form [formGroup]="filterForm" class="company-filter">
   <div class="company-filter__search-block">
     <img alt="icon" src="search.svg"/>
-    <input formControlName="textBox" placeholder="Search by name company" class="company-filter__search-text">
+    <input type="search" formControlName="textBox" placeholder="Search by name company" class="company-filter__search-text">
   </div>
   <select formControlName="selectBoxCompanyType" class="company-filter__select-types">
     <option value="default">All types</option>
