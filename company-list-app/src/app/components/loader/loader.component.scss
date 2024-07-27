@@ -1,6 +1,7 @@
 .container-loaders {
   display: flex;
   flex-direction: column;
+  padding-top: 6em;
   gap: 10em;
 
   &__loader {
