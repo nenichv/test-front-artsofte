@@ -9,12 +9,12 @@ import { ICompany } from "../../models/company.interface";
   styleUrls: ['./company-detail.component.scss']
 })
 export class CompanyDetailComponent implements OnInit {
-  protected company: ICompany | undefined;
+  protected company?: ICompany;
 
-  constructor(private route: ActivatedRoute, private listService: CompanyListService) {}
+  constructor(private _route: ActivatedRoute, private _listService: CompanyListService) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
-    this.company = this.listService.getCompanyById(id);
+    const id = this._route.snapshot.params['id'];
+    this.company = this._listService.getCompanyById(id);
   }
 }

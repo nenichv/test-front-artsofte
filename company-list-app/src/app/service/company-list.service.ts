@@ -10,10 +10,10 @@ import { IFilterData } from "../models/filter-data.interface";
 export class CompanyListService {
   private _companies?: ICompany[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private _http: HttpClient) {}
 
   public getAllCompanies(): Observable<ICompany[]> {
-    return this.http
+    return this._http
       .get<ICompany[]>('https://random-data-api.com/api/company/random_company?size=100')
       .pipe(map((companies: ICompany[]) => {
         this.setAllCompanies(companies);

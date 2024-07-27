@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from "@angular/forms";
+import { IFilterData } from "../../models/filter-data.interface";
 
 @Component({
   selector: 'company-filter',
@@ -12,9 +13,9 @@ export class CompanyFilterComponent implements OnInit {
   @Input()
   public industries: string[] = [];
   @Output()
-  protected filterEvent = new EventEmitter();
+  protected filterEvent: EventEmitter<IFilterData> = new EventEmitter<IFilterData>();
 
-  protected filterForm = new FormGroup({
+  protected filterForm: FormGroup = new FormGroup({
     textBox: new FormControl(''),
     selectBoxCompanyType: new FormControl('default'),
     selectBoxCompanyIndustry: new FormControl('default')
@@ -22,7 +23,7 @@ export class CompanyFilterComponent implements OnInit {
 
   ngOnInit() {
     this.filterForm.valueChanges.subscribe(value => {
-      const filters = {
+      const filters: IFilterData = {
         searchText: value.textBox,
         companyType: value.selectBoxCompanyType,
         companyIndustry: value.selectBoxCompanyIndustry

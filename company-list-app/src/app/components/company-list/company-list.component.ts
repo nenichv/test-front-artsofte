@@ -18,7 +18,7 @@ export class CompanyListComponent implements OnInit {
   protected types: string[] = [];
   protected industries: string[] = [];
 
-  constructor(protected  listService: CompanyListService) {
+  constructor(private  _listService: CompanyListService) {
     this.allCompanies$ = this.refreshSubject$
       .pipe(
         startWith(null),
@@ -37,23 +37,23 @@ export class CompanyListComponent implements OnInit {
   }
 
   protected getAllCompany(): Observable<ICompany[]> {
-    return this.listService.getAllCompanies();
+    return this._listService.getAllCompanies();
   }
 
   protected onSortChange(sortOption: string): void {
-    this.sortList = this.listService.sortListCompanies(sortOption, this.filterList!);
+    this.sortList = this._listService.sortListCompanies(sortOption, this.filterList!);
   }
 
   protected getAllTypesCompanies(): void {
-    this.types = this.listService.getAllTypesCompanies(this.filterList!);
+    this.types = this._listService.getAllTypesCompanies(this.filterList!);
   }
 
   protected getAllIndustriesCompanies(): void {
-    this.industries = this.listService.getAllIndustriesCompanies(this.filterList!);
+    this.industries = this._listService.getAllIndustriesCompanies(this.filterList!);
   }
 
   protected onFilterChange(filterData: IFilterData): void {
-    this.filterList = this.listService.filterListCompanies(filterData);
+    this.filterList = this._listService.filterListCompanies(filterData);
     this.getAllTypesCompanies();
     this.getAllIndustriesCompanies();
   }
