@@ -6,6 +6,9 @@
   <div class="company-list__container-items">
     <company-item *ngFor="let company of filterList" [company]="company"/>
   </div>
+  <div *ngIf="filterList?.length === 0" class="company-list__empty-list-message">
+    No company was found for your queries
+  </div>
 </ng-container>
 
 <ng-template #loaderTemplate>

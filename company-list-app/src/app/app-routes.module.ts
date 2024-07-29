@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CompanyListComponent } from "./components/company-list/company-list.component";
 import { CompanyDetailComponent } from "./components/company-detail/company-detail.component";
 import { CompanyYandexMapComponent } from "./components/company-yandex-map/company-yandex-map.component";
-import {ErrorNotFoundComponent} from "./components/error-not-found/error-not-found.component";
+import { ErrorNotFoundComponent } from "./components/error-not-found/error-not-found.component";
 
 const routes: Routes = [
   {

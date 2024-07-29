@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ICompany } from "../../models/company.interface";
 import { CompanyListService } from "../../service/company-list.service";
 import { Observable, startWith, Subject, switchMap, tap } from "rxjs";
