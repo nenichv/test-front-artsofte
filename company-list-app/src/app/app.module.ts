@@ -13,6 +13,7 @@ import { CompanyFilterComponent } from "./components/company-filter/company-filt
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ErrorNotFoundComponent } from "./components/error-not-found/error-not-found.component";
 import { LoaderComponent } from "./components/loader/loader.component";
+import { AngularYandexMapsModule } from "angular8-yandex-maps";
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { LoaderComponent } from "./components/loader/loader.component";
     FormsModule,
     ReactiveFormsModule,
     ErrorNotFoundComponent,
-    LoaderComponent
+    LoaderComponent,
+    AngularYandexMapsModule
   ],
   providers: [],
   declarations: [
